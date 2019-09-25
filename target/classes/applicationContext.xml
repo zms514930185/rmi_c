@@ -65,4 +65,51 @@
           class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean" destroy-method="shutdown">
         <property name="servers" value="127.0.0.1:11211"/>
     </bean>
+
+    <bean name="clientCheckNum" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <!--要连接的RMI地址、端口、对应服务名称-->
+        <property name="serviceUrl" value="rmi://127.0.0.1:1022/checkNumRmi"/>
+        <!--客户端对应接口-->
+        <property name="serviceInterface" value="com.jnshu.service.CheckNumService_0"/>
+        <!--连接出错时自动重连-->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!--不在容器启动的时候创建与Server端的连接-->
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    <bean name="clientUser" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1022/userRmi"/>
+        <property name="serviceInterface" value="com.jnshu.service.UserService_0"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    <bean name="clientJob" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1022/jobRmi"/>
+        <property name="serviceInterface" value="com.jnshu.service.JobService_0"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <!--第2台服务-->
+    <bean name="clientCheckNum_1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <!--要连接的RMI地址、端口、对应服务名称-->
+        <property name="serviceUrl" value="rmi://127.0.0.1:1023/checkNumRmi"/>
+        <!--客户端对应接口-->
+        <property name="serviceInterface" value="com.jnshu.service.CheckNumService_1"/>
+        <!--连接出错时自动重连-->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!--不在容器启动的时候创建与Server端的连接-->
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    <bean name="clientUser_1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1023/userRmi"/>
+        <property name="serviceInterface" value="com.jnshu.service.UserService_1"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    <bean name="clientJob_1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1023/jobRmi"/>
+        <property name="serviceInterface" value="com.jnshu.service.JobService_1"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
 </beans>

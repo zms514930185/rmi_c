@@ -222,11 +222,11 @@ public class redisTest {
             /*开始进行请求，获取响应内容*/
             CloseableHttpResponse response = httpclient.execute(httpPost);
             int code = response.getStatusLine().getStatusCode();
-            Validate.isTrue(code==200,"连接服务器不成功");
+            Validate.isTrue(code == 200, "连接服务器不成功");
             /*获取响应内容实体*/
-            HttpEntity httpEntity= response.getEntity();
+            HttpEntity httpEntity = response.getEntity();
             /*转换响应内容*/
-            String responseEntiy=EntityUtils.toString(httpEntity);
+            String responseEntiy = EntityUtils.toString(httpEntity);
             /*创建Document对象，对要解析的内容操作*/
             Document document = DocumentHelper.parseText(responseEntiy);
             /*获取根节点*/
@@ -234,13 +234,13 @@ public class redisTest {
             /*提取名为statusMsg（节点元素）标签里的内容*/
             Element msgElement = rootElement.element("statusMsg");
             Element codeElement = rootElement.element("statusCode");
-            logger.info("msg节点:{}，code节点:{}",msgElement.getText(),codeElement.getTextTrim());
+            logger.info("msg节点:{}，code节点:{}", msgElement.getText(), codeElement.getTextTrim());
         } catch (DocumentException e) {
             e.printStackTrace();
-        } catch (ExceptionInInitializerError e){
-            String err=e.getMessage();
-            logger.info("{}",err);
-        }finally {
+        } catch (ExceptionInInitializerError e) {
+            String err = e.getMessage();
+            logger.info("{}", err);
+        } finally {
             /*关闭连接*/
             httpclient.close();
         }
@@ -341,7 +341,7 @@ public class redisTest {
             // 指定要上传到 COS 上对象键,用UUID
             String key = UUID.randomUUID().toString();
 
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key+".jpg", localFile);
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key + ".jpg", localFile);
 
            /* // 方法2 从输入流上传(需提前告知输入流的长度, 否则可能导致 oom)
             FileInputStream fileInputStream = new FileInputStream(localFile);
@@ -355,7 +355,6 @@ public class redisTest {
             // 关闭输入流...*/
 
 
-
             PutObjectResult putObjectResult = cosClient.putObject(putObjectRequest);
 
         } catch (CosClientException serverException) {
@@ -365,7 +364,7 @@ public class redisTest {
 
     /**
      * UUID
-     * */
+     */
     @Test
     void uuid() {
         String key = UUID.randomUUID().toString();
@@ -378,30 +377,46 @@ public class redisTest {
     }*/
 
     @Test
-    void date235959(){
+    void date235959() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         long tt = calendar.getTime().getTime();
-        System.out.println(calendar.get(Calendar.YEAR)+""+calendar.get(Calendar.MONTH)+""+calendar.get(Calendar.DAY_OF_MONTH));
+        System.out.println(calendar.get(Calendar.YEAR) + "" + calendar.get(Calendar.MONTH) + "" + calendar.get(Calendar.DAY_OF_MONTH));
         System.out.println(tt);
         System.out.println(System.currentTimeMillis());
 
-        LocalDate dat= new LocalDate(1567425346000L);
+        LocalDate dat = new LocalDate(1567425346000L);
         System.out.println(dat);
-        boolean da=dat.equals(new LocalDate());
+        boolean da = dat.equals(new LocalDate());
         System.out.println(da);
     }
 
     @Test
-    void pattern(){
+    void pattern() {
         String account = "a514930";
         String pwd;
         String name;
         String phone;
         String code;
-        Validate.matchesPattern(account,"^([A-Za-z]+[\\w]*){5,15}","帐号不可用");
+        Validate.matchesPattern(account, "^([A-Za-z]+[\\w]*){5,15}", "帐号不可用");
     }
 
+    @Test
+    void random() {
+        ArrayList list = new ArrayList();
+        list.add(1);
+        list.add(3);
+        list.add(6);
+        list.add(20);
+        list.add(130);
+        list.add(13);
+        System.out.println(list);
 
+        int rand = new Random().nextInt(2);
 
+        System.out.println(list.size());
+
+        Collections.shuffle(list);
+        System.out.println(list);
+    }
 }

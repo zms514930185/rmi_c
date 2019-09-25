@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.CheckNumMapper">
+    <resultMap id="BaseResultMap" type="com.jnshu.model.CheckNum">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="mail" jdbcType="VARCHAR" property="mail"/>
+        <result column="phone_num" jdbcType="INTEGER" property="phoneNum"/>
+        <result column="mail_num" jdbcType="INTEGER" property="mailNum"/>
+        <result column="create_at" jdbcType="BIGINT" property="createAt"/>
+        <result column="update_at" jdbcType="BIGINT" property="updateAt"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, phone, mail, phone_num, mail_num, create_at, update_at, code
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from check_num
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from check_num
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.jnshu.model.CheckNum">
+    insert into check_num (id, phone, mail, 
+      phone_num, mail_num, create_at, 
+      update_at, code)
+    values (#{id,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, 
+      #{phoneNum,jdbcType=INTEGER}, #{mailNum,jdbcType=INTEGER}, #{createAt,jdbcType=BIGINT}, 
+      #{updateAt,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.jnshu.model.CheckNum">
+        insert into check_num
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="mail != null">
+                mail,
+            </if>
+            <if test="phoneNum != null">
+                phone_num,
+            </if>
+            <if test="mailNum != null">
+                mail_num,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null">
+                #{mail,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                #{phoneNum,jdbcType=INTEGER},
+            </if>
+            <if test="mailNum != null">
+                #{mailNum,jdbcType=INTEGER},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=BIGINT},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.model.CheckNum">
+        update check_num
+        <set>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null">
+                mail = #{mail,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                phone_num = #{phoneNum,jdbcType=INTEGER},
+            </if>
+            <if test="mailNum != null">
+                mail_num = #{mailNum,jdbcType=INTEGER},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=BIGINT},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jnshu.model.CheckNum">
+    update check_num
+    set phone = #{phone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=INTEGER},
+      mail_num = #{mailNum,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectSelective" parameterType="com.jnshu.model.CheckNum" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from check_num
+        <trim prefix="WHERE" prefixOverrides="AND|OR ">
+            <if test="id != null and id !=''">ID=#{id}</if>
+            <if test="phone != null and phone!=''">and phone= #{phone}</if>
+            <if test="mail != null and mail!=''">and mail= #{mail}</if>
+            <if test="createAt !=null ">and create_at = #{createAt}</if>
+            <if test="updateAt !=null ">and update_at = #{updateAt}</if>
+        </trim>
+    </select>
+
+    <update id="updateSelective" parameterType="com.jnshu.model.CheckNum">
+        update check_num
+        <set>
+            <if test="phone != null">                phone = #{phone,jdbcType=VARCHAR},            </if>
+            <if test="mail != null">                mail = #{mail,jdbcType=VARCHAR},            </if>
+            <if test="phoneNum != null">                phone_num = #{phoneNum,jdbcType=INTEGER},            </if>
+            <if test="mailNum != null">                mail_num = #{mailNum,jdbcType=INTEGER},            </if>
+            <if test="createAt != null">                create_at = #{createAt,jdbcType=BIGINT},            </if>
+            <if test="updateAt != null">                update_at = #{updateAt,jdbcType=BIGINT},            </if>
+            <if test="code != null">                code = #{code,jdbcType=VARCHAR},            </if>
+        </set>
+        <trim prefix="WHERE" prefixOverrides="AND|OR ">
+            <if test="id != null and id !=''">ID=#{id}</if>
+            <if test="phone != null and phone!=''">and phone= #{phone}</if>
+            <if test="mail != null and mail!=''">and mail= #{mail}</if>
+        </trim>
+    </update>
+
+</mapper>
